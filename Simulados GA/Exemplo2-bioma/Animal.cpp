@@ -14,7 +14,3 @@ Animal::Animal(const string& n) {
 string Animal::getNome() const {
     return nome;
 }
-
-void Animal::setNome(const string& n) {
-    nome = n;
-}

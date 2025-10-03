@@ -1,15 +1,19 @@
-#ifndef SISTEMA_PEDIDOS_H
-#define SISTEMA_PEDIDOS_H
-#include <iostream>
-#include <vector>
+#ifndef SISTEMAPEDIDOS_H
+#define SISTEMAPEDIDOS_H
+
 #include "Pizza.h"
 #include "PizzaPedido.h"
-using namespace std;
+
+const int MAX_CATALOGO = 20;
+const int MAX_PEDIDOS = 50;
 
 class SistemaPedidos {
 private:
-    vector<Pizza> catalogo;
-    vector<PizzaPedido> listaDePedidos;
+    Pizza catalogo[MAX_CATALOGO];
+    int qtdCatalogo;
+
+    PizzaPedido pedidos[MAX_PEDIDOS];
+    int qtdPedidos;
 
 public:
     SistemaPedidos();
@@ -17,12 +21,11 @@ public:
     void adicionarPizzaCatalogo(Pizza p);
     void exibirCatalogo() const;
 
-    int adicionarPedido(string tamanho, vector<Pizza> sabores, string status);
-    void exibirStatusPedido(int numero) const;
-    void alterarStatusPedido(int numero, string novoStatus);
-    void exibirListaPedidos() const;
+    int adicionarPedido(PizzaPedido pedido);
+    void exibirPedidos() const;
 
-    vector<Pizza> getCatalogo() const;
+    void alterarStatus(int numero, string novo);
+    void exibirStatus(int numero) const;
 };
 
 #endif

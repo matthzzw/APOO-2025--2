@@ -1,28 +1,28 @@
-#ifndef PIZZA_PEDIDO_H
-#define PIZZA_PEDIDO_H
-#include <iostream>
+#ifndef PIZZAPEDIDO_H
+#define PIZZAPEDIDO_H
+
 #include <string>
-#include <vector>
+#include <iostream>
 #include "Pizza.h"
 using namespace std;
 
+const int MAX_SABORES = 4; // no máx. 4 sabores por pizza
+
 class PizzaPedido {
 private:
-    string tamanho;             // P, M, G
+    string tamanho;         // P, M ou G
     int nro_sabores;
-    vector<Pizza> lista_sabores;
-    string status;              // Recebido, Em preparo, Pronto, Entregue
+    Pizza* lista_sabores[MAX_SABORES];
+    string status;
 
 public:
-    PizzaPedido();
-    PizzaPedido(string tamanho, vector<Pizza> sabores, string status);
+    PizzaPedido() {}
+    PizzaPedido(string tamanho, int nro_sabores, Pizza* sabores[], string status);
 
-    string getTamanho() const;
-    int getNumeroSabores() const;
     string getStatus() const;
-    void setStatus(string novoStatus);
+    void setStatus(string novo);
 
-    void exibirPedido(int numero) const;
+    void exibir() const;
 };
 
 #endif

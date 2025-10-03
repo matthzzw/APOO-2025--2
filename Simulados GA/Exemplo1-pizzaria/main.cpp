@@ -5,43 +5,38 @@ using namespace std;
 int main() {
     SistemaPedidos sistema;
 
-    // Catálogo de pizzas (Tabela 1)
-    sistema.adicionarPizzaCatalogo(Pizza("Margherita", "Salgada", "Vegetariana", "Muçarela, Tomate, Manjericão"));
-    sistema.adicionarPizzaCatalogo(Pizza("Pepperoni", "Salgada", "Com Carne", "Pepperoni, Muçarela"));
-    sistema.adicionarPizzaCatalogo(Pizza("Quatro Queijos", "Salgada", "Vegetariana", "Muçarela, Gorgonzola, Parmesão, Provolone"));
-    sistema.adicionarPizzaCatalogo(Pizza("Portuguesa", "Salgada", "Com Carne", "Presunto, Muçarela, Ovo, Ervilhas, Azeitonas"));
-    sistema.adicionarPizzaCatalogo(Pizza("Calabresa", "Salgada", "Com Carne", "Calabresa, Muçarela"));
-    sistema.adicionarPizzaCatalogo(Pizza("Frango com Catupiry", "Salgada", "Com Carne", "Frango, Catupiry, Muçarela"));
-    sistema.adicionarPizzaCatalogo(Pizza("Banana Caramelizada", "Doce", "Vegetariana", "Banana, Creme de Leite Condensado, Canela"));
-    sistema.adicionarPizzaCatalogo(Pizza("Chocolate com Morango", "Doce", "Vegetariana", "Chocolate, Morango"));
-    sistema.adicionarPizzaCatalogo(Pizza("Vegetariana", "Salgada", "Vegetariana", "Milho, Ervilhas, Pimentão, Tomate Cereja, Muçarela"));
-    sistema.adicionarPizzaCatalogo(Pizza("Supreme", "Salgada", "Com Carne", "Pepperoni, Calabresa, Muçarela, Cebola, Pimentão, Azeitonas"));
-    sistema.adicionarPizzaCatalogo(Pizza("Bacon", "Salgada", "Com Carne", "Bacon, Muçarela"));
-    sistema.adicionarPizzaCatalogo(Pizza("Mussarela", "Salgada", "Vegetariana", "Muçarela, Tomate"));
+    // Catálogo (10 sabores)
+    sistema.adicionarPizzaCatalogo(Pizza("Margherita","Salgada","Vegetariana","Muçarela, Tomate, Manjericão"));
+    sistema.adicionarPizzaCatalogo(Pizza("Pepperoni","Salgada","Com Carne","Pepperoni, Muçarela"));
+    sistema.adicionarPizzaCatalogo(Pizza("Quatro Queijos","Salgada","Vegetariana","Muçarela, Gorgonzola, Parmesão, Provolone"));
+    sistema.adicionarPizzaCatalogo(Pizza("Portuguesa","Salgada","Com Carne","Presunto, Muçarela, Ovo, Ervilhas, Azeitonas"));
+    sistema.adicionarPizzaCatalogo(Pizza("Calabresa","Salgada","Com Carne","Calabresa, Muçarela"));
+    sistema.adicionarPizzaCatalogo(Pizza("Frango com Catupiry","Salgada","Com Carne","Frango, Catupiry, Muçarela"));
+    sistema.adicionarPizzaCatalogo(Pizza("Banana Caramelizada","Doce","Vegetariana","Banana, Creme de Leite Condensado, Canela"));
+    sistema.adicionarPizzaCatalogo(Pizza("Chocolate com Morango","Doce","Vegetariana","Chocolate, Morango"));
+    sistema.adicionarPizzaCatalogo(Pizza("Vegetariana","Salgada","Vegetariana","Milho, Ervilhas, Pimentão, Tomate Cereja, Muçarela"));
+    sistema.adicionarPizzaCatalogo(Pizza("Supreme","Salgada","Com Carne","Pepperoni, Calabresa, Muçarela, Cebola, Pimentão, Azeitonas"));
 
-    // Criar pedidos (Tabela 2)
-    vector<Pizza> catalogo = sistema.getCatalogo();
+    sistema.exibirCatalogo();
 
-    // Função auxiliar para buscar pizza pelo nome
-    auto buscaPizza = [&](string nome) {
-        for (auto& p : catalogo)
-            if (p.getNome() == nome) return p;
-        return Pizza(); // pizza vazia
-    };
+    // Criando alguns pedidos de teste
+    Pizza* sabores1[2] = { new Pizza("Margherita","Salgada","Vegetariana",""), new Pizza("Calabresa","Salgada","Com Carne","") };
+    PizzaPedido p1("M",2,sabores1,"Entregue");
+    sistema.adicionarPedido(p1);
 
-    sistema.adicionarPedido("M", {buscaPizza("Margherita"), buscaPizza("Calabresa")}, "Entregue");
-    sistema.adicionarPedido("P", {buscaPizza("Banana Caramelizada"), buscaPizza("Chocolate com Morango")}, "Pronto");
-    sistema.adicionarPedido("G", {buscaPizza("Vegetariana"), buscaPizza("Supreme"), buscaPizza("Pepperoni")}, "Entregue");
-    sistema.adicionarPedido("P", {buscaPizza("Frango com Catupiry")}, "Em preparo");
-    sistema.adicionarPedido("G", {buscaPizza("Quatro Queijos"), buscaPizza("Frango com Catupiry"), buscaPizza("Portuguesa"), buscaPizza("Bacon")}, "Pronto");
-    sistema.adicionarPedido("M", {buscaPizza("Margherita"), buscaPizza("Calabresa"), buscaPizza("Pepperoni")}, "Em preparo");
-    sistema.adicionarPedido("G", {buscaPizza("Bacon")}, "Recebido");
-    sistema.adicionarPedido("P", {buscaPizza("Margherita"), buscaPizza("Calabresa")}, "Em preparo");
-    sistema.adicionarPedido("G", {buscaPizza("Mussarela"), buscaPizza("Portuguesa")}, "Em preparo");
-    sistema.adicionarPedido("M", {buscaPizza("Quatro Queijos"), buscaPizza("Margherita"), buscaPizza("Frango com Catupiry")}, "Recebido");
+    Pizza* sabores2[2] = { new Pizza("Banana Caramelizada","Doce","Vegetariana",""), new Pizza("Chocolate com Morango","Doce","Vegetariana","") };
+    PizzaPedido p2("P",2,sabores2,"Pronto");
+    sistema.adicionarPedido(p2);
 
-    // Exibir todos os pedidos
-    sistema.exibirListaPedidos();
+    Pizza* sabores3[3] = { new Pizza("Vegetariana","Salgada","Vegetariana",""), new Pizza("Supreme","Salgada","Com Carne",""), new Pizza("Pepperoni","Salgada","Com Carne","") };
+    PizzaPedido p3("G",3,sabores3,"Entregue");
+    sistema.adicionarPedido(p3);
+
+    sistema.exibirPedidos();
+
+    sistema.exibirStatus(2);
+    sistema.alterarStatus(2,"Entregue");
+    sistema.exibirStatus(2);
 
     return 0;
 }

@@ -2,16 +2,21 @@
 #define BIOMA_H
 
 #include <string>
-#include <vector>
+#include <iostream>
 #include "Animal.h"
 #include "Vegetal.h"
 using namespace std;
 
+const int MAX_ANIMAIS = 20;
+const int MAX_VEGETAIS = 20;
+
 class Bioma {
 private:
     string nome;
-    vector<Animal*> fauna;    // armazenamos ponteiros para que o mesmo objeto possa ser referenciado em vários biomas
-    vector<Vegetal*> flora;
+    Animal* fauna[MAX_ANIMAIS];
+    Vegetal* flora[MAX_VEGETAIS];
+    int qtdFauna;
+    int qtdFlora;
 
 public:
     Bioma(const string& nome);
@@ -25,4 +30,4 @@ public:
     void exibirFlora() const;
 };
 
-#endif // BIOMA_H
+#endif

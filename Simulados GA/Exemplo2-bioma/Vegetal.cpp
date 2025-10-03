@@ -14,7 +14,3 @@ Vegetal::Vegetal(const string& n) {
 string Vegetal::getNome() const {
     return nome;
 }
-
-void Vegetal::setNome(const string& n) {
-    nome = n;
-}

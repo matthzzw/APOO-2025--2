@@ -19,7 +19,6 @@ public:
     Vegetal(const string& nome);
 
     string getNome() const;
-    void setNome(const string& n);
 };
 
-#endif // VEGETAL_H
+#endif
